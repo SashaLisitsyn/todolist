@@ -18,5 +18,6 @@
 3. JS.
 4. React.
 5. React hooks.
+6. Redux.
 
 https://sashalisitsyn.github.io/todolist/

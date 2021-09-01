@@ -1,7 +1,10 @@
+import { connect } from 'react-redux';
+import { removeTodo } from '../../actions/todoActions';
+
 import './styles.css';
 
 const ToDo = ({ todo, removeTodo }) => {
-  const deleteTodo = () => {
+  const handleRemoveTodo = () => {
     removeTodo(todo.id);
   };
 
@@ -10,7 +13,7 @@ const ToDo = ({ todo, removeTodo }) => {
       <button
         className="btn btn-outline-secondary"
         type="button"
-        onClick={deleteTodo}
+        onClick={handleRemoveTodo}
       >
         Удалить
       </button>
@@ -24,4 +27,8 @@ const ToDo = ({ todo, removeTodo }) => {
   );
 };
 
-export default ToDo;
+const mapDispatchToProps = {
+  removeTodo,
+};
+
+export default connect(null, mapDispatchToProps)(ToDo);

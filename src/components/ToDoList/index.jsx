@@ -1,13 +1,21 @@
+import { connect } from 'react-redux';
+
 import ToDo from '../ToDo';
 
-const ToDoList = ({ todos, removeTodo }) => {
+const ToDoList = ({ syncTodos }) => {
   return (
     <div className="todolist">
-      {todos.map((todo) => (
-        <ToDo key={todo.id} todo={todo} removeTodo={removeTodo} />
+      {syncTodos.map((todo) => (
+        <ToDo key={todo.id} todo={todo} />
       ))}
     </div>
   );
 };
 
-export default ToDoList;
+const mapStateToProps = (state) => {
+  return {
+    syncTodos: state.todos.todos,
+  };
+};
+
+export default connect(mapStateToProps, null)(ToDoList);

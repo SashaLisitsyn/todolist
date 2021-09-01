@@ -1,18 +1,32 @@
-import { useState } from 'react';
-
 import './styles.css';
 
-const ToDoForm = ({ submitForm }) => {
-  const [value, setValue] = useState('');
+import { useState } from 'react';
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+import { connect } from 'react-redux';
+import { createTodo } from '../../actions/todoActions';
+
+const ToDoForm = ({ createTodo }) => {
+  const [value, setValue] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    submitForm(value);
+    handleSubmitForm(value);
     setValue('');
+  };
+
+  const handleSubmitForm = (value) => {
+    if (value) {
+      const newTodo = {
+        id: Math.random().toString(36).substr(2, 9),
+        task: value,
+        complete: false,
+      };
+      createTodo(newTodo);
+    }
+  };
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
   };
 
   const handleKeyPress = (e) => {
@@ -44,4 +58,8 @@ const ToDoForm = ({ submitForm }) => {
   );
 };
 
-export default ToDoForm;
+const mapDispatchToProps = {
+  createTodo,
+};
+
+export default connect(null, mapDispatchToProps)(ToDoForm);
